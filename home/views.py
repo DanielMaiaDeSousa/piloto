@@ -13,8 +13,12 @@ def ajuda(request):
     return render(request, "ajuda.html")
 
 def perfil(request, usuario):
+    # Decodifica a string da URL: substitui '%20' por espaço
+    nome_exibicao = usuario.replace('%20', ' ')
+    
+    # Passa o nome decodificado para o template no contexto
     contexto = {
-        'usuario': usuario
+        'usuario': nome_exibicao # Agora envia 'Daniel Maia'
     }
     return render(request, "perfil.html", contexto)
 
