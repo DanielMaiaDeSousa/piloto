@@ -5,10 +5,10 @@ def index(request):
     return render(request, "index.html")
 
 def sobre(request):
-    return HttpResponse("Sobre o Sistema Django.")
+    return render(request, "sobre.html")
 
 def contato(request):
-    return HttpResponse("Página de Contato.")
+    return render(request, "contato.html")
 
 def ajuda(request):
-    return HttpResponse("Página de Ajuda.")
+    return render(request, "ajuda.html")
