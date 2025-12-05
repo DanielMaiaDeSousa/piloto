@@ -1,6 +1,5 @@
 from django.shortcuts import render, HttpResponse
 
-# Create your views here.
 def index(request):
     return render(request, "index.html")
 
@@ -12,3 +11,31 @@ def contato(request):
 
 def ajuda(request):
     return render(request, "ajuda.html")
+
+def perfil(request, usuario):
+    contexto = {
+        'usuario': usuario
+    }
+    return render(request, "perfil.html", contexto)
+
+def dia_da_semana(request, numero):
+    dias = {
+        1: "Domingo",
+        2: "Segunda-feira",
+        3: "Terça-feira",
+        4: "Quarta-feira",
+        5: "Quinta-feira",
+        6: "Sexta-feira",
+        7: "Sábado",
+    }
+    
+    if 1 <= numero <= 7:
+        nome_dia = dias[numero]
+    else:
+        nome_dia = "Dia inválido"
+    
+    contexto = {
+        'numero_dia': numero,
+        'nome_dia': nome_dia,
+    }
+    return render(request, "diasemana.html", contexto)

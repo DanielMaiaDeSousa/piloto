@@ -1,4 +1,3 @@
-
 from django.contrib import admin
 from django.urls import path, include
 from . import views
@@ -8,5 +7,6 @@ urlpatterns = [
     path('sobre/', views.sobre, name="sobre"),
     path('contato/', views.contato, name="contato"),
     path('ajuda/', views.ajuda, name="ajuda"),
-    
+    path('perfil/<str:usuario>/', views.perfil, name='perfil'),
+    path('diasemana/<int:numero>/', views.dia_da_semana, name='dia_da_semana'),
 ]
