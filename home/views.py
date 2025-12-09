@@ -12,6 +12,9 @@ def contato(request):
 def ajuda(request):
     return render(request, "ajuda.html")
 
+def exibir_item(request, id ):
+    return render(request, "exibir_item.html", {'id': id})
+
 def perfil(request, usuario):
     # Decodifica a string da URL: substitui '%20' por espaço
     nome_exibicao = usuario.replace('%20', ' ')

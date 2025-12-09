@@ -9,7 +9,8 @@
         <a href="{% url 'index' %}">Home</a> |
         <a href="{% url 'sobre' %}">Sobre</a> |
         <a href="{% url 'contato' %}">Contato</a> |
-        <a href="{% url 'ajuda' %}">Ajuda</a>
+        <a href="{% url 'ajuda' %}">Ajuda</a> |
+        <a href="{% url 'exibir_item' id=1 %}">Item</a>
     </nav>
     <hr>
     {% block conteudo %}
