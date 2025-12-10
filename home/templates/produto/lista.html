@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block titulo %}Lista de Produtos{% endblock %}
+
+{% block conteudo %} 
+
+<table class="table table-bordered table-hover mx-auto">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Valor (R$)</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for item in lista %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.nome }}</td>
+                <td>{{ item.preco }}</td>
+            </tr>
+            {% endfor %}
+            
+            
+        </tbody>
+    </table>
+
+
+{% endblock %}

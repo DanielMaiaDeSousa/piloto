@@ -8,6 +8,7 @@ urlpatterns = [
     path('contato/', views.contato, name="contato"),
     path('ajuda/', views.ajuda, name="ajuda"),
     path('perfil/<str:usuario>/', views.perfil, name='perfil'),
-    path('diasemana/<int:numero>/', views.dia_da_semana, name='dia_da_semana'),
+    path('dia/<int:dia>/', views.dia_da_semana, name='dia_da_semana'),
     path('item/<int:id>/', views.exibir_item, name='exibir_item'),
+    path('produto/', views.produto, name='produto'),
 ]
