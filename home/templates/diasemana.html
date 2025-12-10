@@ -6,9 +6,9 @@
 <h1>Página dia da Semana</h1>
 
 {% if nome_dia == "Dia inválido" %}
-    <p>O dia passado corresponde a **Dia inválido**</p>
+    <p>O dia passado corresponde a Dia inválido</p>
     <p>O número {{ numero_dia }} está fora do intervalo (1 a 7).</p>
 {% else %}
-    <p>O dia passado corresponde a **{{ nome_dia }}**</p>
+    <p>O dia passado corresponde a {{ nome_dia }}</p>
 {% endif %}
 {% endblock %}
