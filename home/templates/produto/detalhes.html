@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Detalhes do Produto{% endblock %}
+
+{% block titulo_pagina %}Detalhes do Produto{% endblock %}
+
+{% block conteudo %}
+    {% if produto %}
+        <p>Você está vendo detalhes do Produto ID **{{ id }}**</p>
+        <ul>
+            <li>Nome: {{ produto.nome }}</li>
+            <li>Preço: R$ {{ produto.preco }}</li>
+            <li>Estoque: {{ produto.estoque }} unidades</li>
+        </ul>
+        <br>
+        <button onclick="location.href='{% url 'produto' %}'" class="btn btn-secondary" type="button">Voltar para a Lista</button>
+    {% else %}
+        <p>Produto ID {{ id }} não encontrado.</p>
+    {% endif %}
+{% endblock %}

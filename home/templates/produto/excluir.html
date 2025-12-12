@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Confirmação de Exclusão{% endblock %}
+
+{% block titulo_pagina %}Confirmação de Exclusão{% endblock %}
+
+{% block conteudo %}
+    <p>Você está removendo o Produto ID {{ id }}</p>
+    <p>Esta ação é irreversível. Tem certeza?</p>
+    <br>
+    
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>
+        <button onclick="location.href='{% url 'produto' %}'" class="btn btn-secondary" type="button">Cancelar</button>
+    </form>
+{% endblock %}
