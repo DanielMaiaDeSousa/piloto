@@ -3,6 +3,9 @@
 {% block titulo %}Contato{% endblock %}
 
 {% block conteudo %}
-<h1>Página de Contato</h1>
-<p>Entre em contato conosco: contato@example.com</p>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary mt-4" type="submit">Enviar</button>
 {% endblock %}

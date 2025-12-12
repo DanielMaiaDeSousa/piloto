@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .forms import ContatoForm, ProdutoForm
 
 def index(request):
     return render(request, "index.html")
@@ -8,7 +9,11 @@ def sobre(request):
     return render(request, "sobre.html")
 
 def contato(request):
-    return render(request, "contato.html")
+    form = ContatoForm()
+    context = {
+        'form': form    
+        }
+    return render(request, "contato.html", context)
 
 def ajuda(request):
     return render(request, "ajuda.html")
@@ -73,3 +78,22 @@ def produto(request):
         ],
     }
     return render(request, 'produto/lista.html',contexto)
+
+# No topo do seu views.py, importe o ProdutoForm
+# Dependendo de onde você salvou o forms.py, a importação pode mudar.
+# Se forms.py estiver na mesma pasta do views.py:
+from .forms import ProdutoForm
+# Se estiver em outro app, use: from nome_do_app.forms import ProdutoForm
+
+from django.shortcuts import render
+
+def form_produto(request):
+    
+    form = ProdutoForm()    
+   
+    contexto = {
+        'form': form
+    }   
+   
+    return render(request, 'produto/formulario.html', contexto)
+
