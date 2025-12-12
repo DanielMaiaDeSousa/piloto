@@ -4,8 +4,40 @@
 
 {% block conteudo %}
 
+<h1>Fale Conosco</h1>
+<p>Preencha o formulário abaixo para entrar em contato com a nossa equipe.</p>
+<hr>
+
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn-primary mt-4" type="submit">Enviar</button>
+
+    <div class="mb-3">
+        <label for="{{ form.nome.id_for_label }}" class="form-label">{{ form.nome.label }}</label>
+        {{ form.nome }} 
+    </div>
+
+    <div class="mb-3">
+        <label for="{{ form.email.id_for_label }}" class="form-label">{{ form.email.label }}</label>
+        {{ form.email }}
+    </div>
+    
+    <div class="mb-3">
+        <label for="{{ form.telefone.id_for_label }}" class="form-label">{{ form.telefone.label }}</label>
+        {{ form.telefone }}
+    </div>
+
+    <div class="mb-3">
+        <label for="{{ form.assunto.id_for_label }}" class="form-label">{{ form.assunto.label }}</label>
+        {{ form.assunto }}
+    </div>
+
+    <div class="mb-3">
+        <label for="{{ form.mensagem.id_for_label }}" class="form-label">{{ form.mensagem.label }}</label>
+        {{ form.mensagem }}
+    </div>
+    
+    <button onclick="location.href='{% url 'index' %}'" class="btn btn-secondary mt-4 me-2" type="button">Voltar</button>
+    <button class="btn btn-primary mt-4" type="submit">Enviar Mensagem</button>
+
+</form>
 {% endblock %}

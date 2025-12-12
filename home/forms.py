@@ -1,9 +1,15 @@
 from django.db import models
-
-# Create your models here.
-# forms.py
 from django import forms
 
+
+# --- Definição das opções (CHOICES) ---
+ASSUNTO_CHOICES = (
+    ('suporte', 'Suporte técnico'),
+    ('comercial', 'Comercial'),
+    ('reclamacao', 'Reclamação'),
+    ('parceria', 'Parceria'),
+    ('financeiro', 'Financeiro'),
+)
 
 class ContatoForm(forms.Form):
     
@@ -16,12 +22,25 @@ class ContatoForm(forms.Form):
     email = forms.EmailField(
         widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'E-mail'})
     )
+
+    
+    telefone = forms.CharField(
+        max_length=15, 
+        label='Telefone / WhatsApp',
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '(99) 99999-9999'}) #
+    )
+
+    
+    assunto = forms.ChoiceField(
+        choices=ASSUNTO_CHOICES, 
+        label='Assunto do Contato',
+        widget=forms.Select(attrs={'class': 'form-control'}) 
+    )
+
     mensagem = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Escreva sua mensagem', 'rows': 4})
     )
 
-
-from django import forms
 
 class ProdutoForm(forms.Form):
     nome = forms.CharField(
