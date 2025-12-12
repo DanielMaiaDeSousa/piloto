@@ -7,6 +7,9 @@
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button class="btn btn-primary mt-4" type="submit">Salvar Produto</button>
+
+    <button onclick="location.href='{% url 'produto' %}'" class="btn btn-secondary mt-4" type="button">Voltar</button>
+    <button class="btn btn-primary mt-4" type="submit">Salvar</button>
+
 </form>
 {% endblock %}
