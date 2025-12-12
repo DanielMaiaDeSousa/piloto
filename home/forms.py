@@ -55,3 +55,9 @@ class ProdutoForm(forms.Form):
         label='Preço',
         widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Ex: 600.00'})
     )
+
+    estoque = forms.IntegerField(
+        label='Estoque',
+        min_value=0, # Opcional: Garante que o estoque não é negativo
+        widget=forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Ex: 10'})
+    )

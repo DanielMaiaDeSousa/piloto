@@ -1,12 +1,12 @@
-from django.shortcuts import render, redirect # Garante render e redirect
+from django.shortcuts import render, redirect 
 from django.http import HttpResponse
-from .forms import ContatoForm, ProdutoForm # Importa os formulários
+from .forms import ContatoForm, ProdutoForm 
 
 # --- FUNÇÕES AUXILIARES E LISTA DE PRODUTOS ---
 
 # Função para fornecer a lista de produtos COMPLETA (agora com Estoque)
 def get_produto_lista():
-    # Sua lista original com o campo 'estoque' adicionado
+    
     return [
         {'id': 1, 'nome': 'Notebook', 'preco': '2.500,00', 'estoque': 10},
         {'id': 2, 'nome': 'Monitor', 'preco': '500,00', 'estoque': 10},
@@ -24,7 +24,7 @@ def get_produto_lista():
     ]
 
 
-# --- VIEWS EXISTENTES ---
+
 
 def index(request):
     return render(request, "index.html")
@@ -79,14 +79,13 @@ def produto(request):
     }
     return render(request, 'produto/lista.html',contexto)
 
-# >>> ESTA É A FUNÇÃO QUE ESTAVA FALTANDO E CAUSANDO O ERRO <<<
+
 def form_produto(request):
     # Lógica de POST e GET para Novo Produto (Se estiver no modo "Novo")
     if request.method == 'POST':
         form = ProdutoForm(request.POST) 
         if form.is_valid():
-            # Ação de salvar novo produto (apenas log por enquanto)
-            # print(f"Novo Produto recebido: {form.cleaned_data['nome']}")
+           
             return redirect('produto') 
     else:
         form = ProdutoForm()    
@@ -109,15 +108,70 @@ def detalhes_produto(request, id):
     }
     return render(request, 'produto/detalhes.html', contexto)
 
+
+
 def editar_produto(request, id):
+    lista = get_produto_lista()
+    produto_existente = next((item for item in lista if item['id'] == id), None)
+
+    if produto_existente is None:
+        return redirect('produto') 
+
+    if request.method == 'POST':
+        form = ProdutoForm(request.POST) 
+        
+        if form.is_valid():
+            
+            produto_existente['nome'] = form.cleaned_data['nome']
+            produto_existente['preco'] = form.cleaned_data['preco']
+            produto_existente['estoque'] = form.cleaned_data['estoque'] 
+            
+            print(f"Produto ID {id} ALTERADO com sucesso!")
+            return redirect('produto') 
+            
+    else:
+        # Lógica GET: Pré-preenche o formulário
+        # CORRIGIDO: Inclui o valor do estoque para pré-preenchimento
+        form = ProdutoForm(initial={
+            'nome': produto_existente['nome'],
+            'preco': produto_existente['preco'],
+            'estoque': produto_existente['estoque'], 
+        })
+    
     contexto = {
         'id': id,
-        'titulo': f"Editar Produto ID {id}",
+        'form': form,
+        'titulo': f"Editar Produto ID {id} - {produto_existente['nome']}",
     }
     return render(request, 'produto/formulario.html', contexto)
 
+
+
+from django.shortcuts import render, redirect 
+
 def excluir_produto(request, id):
-    contexto = {
-        'id': id
-    }
-    return render(request, 'produto/excluir.html', contexto)
+    
+    lista = get_produto_lista() 
+    
+    produto_existente = next((item for item in lista if item['id'] == id), None)
+
+    if request.method == 'POST':
+        # Lógica POST: Confirmação de Exclusão
+        
+        if produto_existente is not None:
+            # A mensagem de sucesso DEVE ser exibida no terminal do servidor
+            print(f"Produto ID {id} ('{produto_existente['nome']}') EXCLUÍDO com sucesso! (Simulação)")
+            
+        
+        else:
+             print(f"AVISO: Tentativa de exclusão do Produto ID {id}, mas o produto não foi encontrado na lista.")
+             
+        return redirect('produto')
+            
+    else:
+        # Lógica GET: Exibir a tela de confirmação
+        contexto = {
+            'id': id,
+            'produto': produto_existente # Passa o produto para o template, se necessário
+        }
+        return render(request, 'produto/excluir.html', contexto)

@@ -1,15 +1,23 @@
 {% extends 'base.html' %}
 
-{% block titulo %}Formulário de Produtos{% endblock %}
+{% block titulo %}
+    {% if titulo %}{{ titulo }}{% else %}Novo Produto{% endif %}
+{% endblock %}
+
+{% block titulo_pagina %}
+    {% if titulo %}{{ titulo }}{% else %}Novo Produto{% endif %}
+{% endblock %}
 
 {% block conteudo %}
-
 <form method="post">
     {% csrf_token %}
+
     {{ form.as_p }}
 
-    <button onclick="location.href='{% url 'produto' %}'" class="btn btn-secondary mt-4" type="button">Voltar</button>
-    <button class="btn btn-primary mt-4" type="submit">Salvar</button>
+    <button onclick="location.href='{% url 'produto' %}'" class="btn btn-secondary mt-4 me-2" type="button">Voltar</button>
 
+    <button class="btn btn-primary mt-4" type="submit">
+        {% if id %}Atualizar Produto{% else %}Cadastrar Produto{% endif %}
+    </button>
 </form>
 {% endblock %}

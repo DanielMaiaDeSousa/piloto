@@ -10,8 +10,8 @@
     <br>
     
     <form method="POST">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>
-        <button onclick="location.href='{% url 'produto' %}'" class="btn btn-secondary" type="button">Cancelar</button>
-    </form>
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>
+    <button onclick="location.href='{% url 'produto' %}'" class="btn btn-secondary" type="button">Cancelar</button>
+</form>
 {% endblock %}
